@@ -23,12 +23,24 @@ p {
   padding: 5px 0;
 }
 
+input[type="text"] {
+  background-color: #2d3748;
+  border: none;
+  border-radius: 10px;
+  color: #e5e7eb;
+  font-size: 1rem;
+  padding: 10px;
+  width: 100%;
+}
+input[type="text"]:focus {
+  outline: none;
+}
 .navbar {
   display: flex;
   align-items: center;
   gap: 10px;
   justify-content: center;
-  background-color: #c0c0c0;
+  background-color: #2d3748;
   text-align: center;
   padding: 20px;
   margin-bottom: 100px;
@@ -51,22 +63,33 @@ section {
 }
 
 .view-more {
-  text-align: center;
-  font-size: 1rem;
-  color: #c0c0c0;
+  background-color: #4f46e5;
+  border-radius: 10px;
+  color: #e5e7eb;
   cursor: pointer;
-  margin: 50px 0 60px;
+  font-size: 0.9rem;
+  margin: 20px auto;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  transition: background-color 0.3s ease-in-out;
+  width: fit-content;
 }
 
 .view-more:hover {
-  text-decoration: underline;
+  background-color: #433ee5;
 }
 
 .repo-card,
 .repodetail-card {
-  border: 1px solid #c0c0c0;
-  padding: 13px;
-  border-radius: 5px;
+  background-color: #2d3748;
+  border-radius: 10px;
+  padding: 20px;
+  transition: transform 0.3s ease-in-out;
+}
+.repo-card:hover,
+.repodetail-card {
+  transform: scale(1.05);
 }
 
 a {
@@ -79,9 +102,9 @@ a:hover {
 }
 
 .repo-name {
-  color: #c0c0c0;
-  font-size: 2rem;
-  word-break: break-word;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 10px;
 }
 
 #repodetail {
@@ -130,7 +153,20 @@ a:hover {
 .error-status {
   font-size: 5rem;
 }
+/* another */
+.language {
+  font-size: 0.9rem;
+  margin-bottom: 5px;
+}
 
+.date {
+  font-size: 0.8rem;
+  margin-bottom: 5px;
+}
+
+.visibility {
+  font-size: 0.8rem;
+}
 @media screen and (max-width: 380px) {
   .repo-container {
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -142,5 +178,19 @@ a:hover {
 
   .github-icon {
     font-size: 2rem;
+  }
+  /* nn */
+  .repo-card {
+    padding: 15px;
+  }
+
+  .repo-name {
+    font-size: 1.3rem;
+  }
+
+  .language,
+  .date,
+  .visibility {
+    font-size: 0.7rem;
   }
 }

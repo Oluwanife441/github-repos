@@ -6,6 +6,7 @@ function Home() {
   const [user, setUser] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [showViewMore, setShowViewMore] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
 
   const fetchRepos = () => {
     fetch(
@@ -29,24 +30,50 @@ function Home() {
   const viewMore = () => {
     setCurrentPage(currentPage + 1);
   };
-  const userElements = user.map((userElement) => {
-    return (
-      <div className="repo-card" key={userElement.id}>
-        <Link to={`/repodetails/${userElement.name}`}>
-          <h2 className="repo-name">{userElement.name}</h2>
-        </Link>
-        <p className="language">
-          Langauge:{" "}
-          {userElement.language === null ? "none" : userElement.language}
-        </p>
-        <p className="date">Start date & time: {userElement.created_at}</p>
-        <p className="visibility">Visibility: {userElement.visibility}</p>
-      </div>
-    );
-  });
+
+  const userElements = user
+    .filter((userElement) => {
+      if (searchQuery === "") {
+        return true;
+      } else {
+        return userElement.name
+          .toLowerCase()
+          .includes(searchQuery.toLowerCase());
+      }
+    })
+    .map((userElement) => {
+      return (
+        <div className="repo-card" key={userElement.id}>
+          <Link to={`/repodetails/${userElement.name}`}>
+            <h2 className="repo-name">{userElement.name}</h2>
+          </Link>
+          <p className="language">
+            Langauge:{" "}
+            {userElement.language === null ? "none" : userElement.language}
+          </p>
+          <p className="date">Start date & time: {userElement.created_at}</p>
+          <p className="visibility">Visibility: {userElement.visibility}</p>
+        </div>
+      );
+    });
 
   return (
     <>
+      <div style={{ display: "flex", justifyContent: "center" }}>
+        <input
+          type="text"
+          placeholder="Search..."
+          value={searchQuery}
+          onChange={(event) => setSearchQuery(event.target.value)}
+          style={{
+            width: "50%",
+            padding: "10px",
+            margin: "10px",
+            border: "1px solid #ccc",
+            borderRadius: "5px",
+          }}
+        />
+      </div>
       <section className="repo-container">{userElements}</section>
       <p className="view-more" onClick={viewMore}>
         {showViewMore}
